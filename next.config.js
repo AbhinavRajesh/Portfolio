@@ -13,6 +13,7 @@ module.exports = {
       "chatbotish.vercel.app",
       "sahaay.xyz",
       "i.scdn.co",
+      "mosaic.scdn.co",
     ],
   },
 };
