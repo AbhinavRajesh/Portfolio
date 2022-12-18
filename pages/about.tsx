@@ -34,14 +34,14 @@ const About: NextPage<any> = ({ playlists, topTracks }: Props) => {
       localStorage.getItem("currentlyPlaying");
     const cachedCurrentlyPlaying = cachedCurrentlyPlayingString
       ? ((await JSON.parse(
-          cachedCurrentlyPlayingString
-        )) as CachedCurrentlyPlaying)
+        cachedCurrentlyPlayingString
+      )) as CachedCurrentlyPlaying)
       : null;
     if (
       cachedCurrentlyPlaying &&
       new Date().getTime() / 1000 -
-        parseInt(cachedCurrentlyPlaying.lastUpdated) <
-        60 * 4
+      parseInt(cachedCurrentlyPlaying.lastUpdated) <
+      60 * 4
     ) {
       setCurrentlyPlaying(cachedCurrentlyPlaying);
       return;
@@ -116,7 +116,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     if (data.success) {
       return {
         props: {
-          playlists: data.playlists as Spotify.Playlist[],
+          playlists: data.playlists.filter(({ numberOfTracks }) => numberOfTracks) as Spotify.Playlist[],
           topTracks: data.topTracks as Spotify.TopTracks[],
         },
         revalidate: 1 * 60 * 60,
