@@ -116,7 +116,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     if (data.success) {
       return {
         props: {
-          playlists: data.playlists.filter(({ numberOfTracks }) => numberOfTracks) as Spotify.Playlist[],
+          playlists: data.playlists.filter(({ numberOfTracks }) => numberOfTracks !== 0) as Spotify.Playlist[],
           topTracks: data.topTracks as Spotify.TopTracks[],
         },
         revalidate: 1 * 60 * 60,

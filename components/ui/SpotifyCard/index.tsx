@@ -42,12 +42,15 @@ const SpotifyCard = ({
         {explicit && (
           <MdExplicit className="inline -mt-[3px] mr-1 text-gray-300" />
         )}
-        {name} •
+        {name}{" "}
         {description && (
-          <span className="font-normal text-xs text-gray-400 mt-[5px]">
+          <>
+            •
             {" "}
-            {description}
-          </span>
+            <span className="font-normal text-xs text-gray-400 mt-[5px]">
+              {description}
+            </span>
+          </>
         )}
       </h3>
       {numberOfTracks && (

@@ -11,12 +11,12 @@ const Playlists = ({ playlists }: Props) => {
       <h2 className="text-2xl font-bold">My Playlists</h2>
       <div className="grid gap-[20px] mt-[30px] grid-cols-2 sm:grid-cols-3">
         {playlists.map(
-          ({ name, description, imageUrl, numberOfTracks, url }) => (
+          ({ name, imageUrl, numberOfTracks, url }) => (
             <SpotifyCard
               name={name}
               imageUrl={imageUrl}
               url={url}
-              description={description}
+              description={""}
               numberOfTracks={numberOfTracks}
               key={url}
             />
