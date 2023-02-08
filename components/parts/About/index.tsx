@@ -117,7 +117,7 @@ const About = () => {
         }}
       >
         <Button
-          to="/resume/may-2022.pdf"
+          to="/resume/resume.pdf"
           text="Resume"
           key="update"
           extraClassNames="mr-[8px]"
