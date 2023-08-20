@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const education: Parameters<typeof Card>[0][] = [
   {
     title: "B.Tech in CSE",
-    value: "9 GPA",
+    value: "9.05 GPA",
     description: "School Of Engineering, CUSAT, India",
     extras: "2019-23",
   },
