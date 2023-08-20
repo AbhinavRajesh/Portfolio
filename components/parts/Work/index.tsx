@@ -18,7 +18,7 @@ const workExperience: Parameters<typeof Card>[0][] = [
         </a>
       </div>
     ),
-    value: "Feb. 2022 - Present",
+    value: "Feb. 2022 - June 2023",
     description:
       "Working on mini-projects that will help GitHub better serve developers in India",
   },
