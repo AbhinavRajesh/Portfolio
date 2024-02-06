@@ -27,7 +27,7 @@ const Custom404 = ({ gifUrl }: any) => {
         </p>
         <div className="flex space-x-5 mt-[20px]">
           <Link href="/">
-            <a className="text-primary_light">Return to Home</a>
+            <div className="text-primary_light">Return to Home</div>
           </Link>
           <a
             className="text-primary_light"
