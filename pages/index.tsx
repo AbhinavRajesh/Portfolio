@@ -19,7 +19,6 @@ const Home: NextPage = () => {
         url="https://abhinavrajesh.com"
       />
       <Navbar />
-      {/* text-dark dark:text-text_dark */}
       <div className="flex px-4 flex-col pt-[86px] text-black dark:text-white dark:bg-gradient-to-tr dark:from-[#111827] dark:to-black">
         <About />
         <Education />

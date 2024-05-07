@@ -12,12 +12,8 @@ const Footer = () => {
             <small className="text-[12px]">Full Stack Developer</small>
           </div>
           <div className="flex flex-col text-dark dark:text-text_dark flex-1">
-            <Link href="/">
-              <a>Home</a>
-            </Link>
-            <Link href="/about">
-              <a>About</a>
-            </Link>
+            <Link href="/">Home</Link>
+            <Link href="/about">About</Link>
             <a
               href="https://blog.abhinavrajesh.com"
               target="_blank"
@@ -25,9 +21,7 @@ const Footer = () => {
             >
               Blog &#x2197;
             </a>
-            <Link href="/projects">
-              <a>Projects</a>
-            </Link>
+            <Link href="/projects">Projects</Link>
           </div>
         </div>
         <span className="text-xs text-center pb-4 font-medium mt-[20px]">

@@ -21,10 +21,13 @@ const From = () => {
           alt="Kerala, India Map View"
           width={800}
           height={400}
-          layout="responsive"
           quality={100}
           className="rounded-[10px]"
-        />
+          sizes="100vw"
+          style={{
+            width: "100%",
+            height: "auto"
+          }} />
         <MapPin />
       </div>
       <div className="flex items-center justify-end mt-[5px] text-dark dark:text-text_dark">
