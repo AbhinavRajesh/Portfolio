@@ -1,5 +1,6 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
+import Bubble from "../Bubble";
 
 interface Props {
   title: string | JSX.Element;
@@ -8,6 +9,7 @@ interface Props {
   extras?: string | JSX.Element;
   delay?: number;
   inView?: boolean;
+  bubbles?: string[];
 }
 
 const Card = ({
@@ -17,6 +19,7 @@ const Card = ({
   extras,
   inView,
   delay = 0,
+  bubbles,
 }: Props) => {
   const [loaded, setLoaded] = useState<boolean>(false);
   const animation = useAnimation();
@@ -59,6 +62,13 @@ const Card = ({
       {extras && (
         <div className="italic text-xs font-medium leading-[17px] mt-1">
           {extras}
+        </div>
+      )}
+      {bubbles?.length !== 0 && (
+        <div className="flex mt-[12px] ml-[20px] flex-wrap">
+          {bubbles?.map((skill) => (
+            <Bubble text={skill} variant="secondary" key={skill} />
+          ))}
         </div>
       )}
     </motion.div>

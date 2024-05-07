@@ -41,7 +41,8 @@ const About = () => {
       <AboutSection
         content={[
           <div key="hero">
-            I&apos;m currently pursuing my bachelor&apos;s degree from{" "}
+            I hold a Bachelor&apos;s degree in Computer Science and Engineering
+            from{" "}
             <a
               href="https://soe.cusat.ac.in/"
               target="_blank"
@@ -49,9 +50,11 @@ const About = () => {
               className="font-bold text-primary_light hover:text-blue-400 transition-colors duration-150 ease-in dark:text-primary_dark"
             >
               School of Engineering, CUSAT, India
-            </a>{" "}
-            and expected to graduate on 2023. I have always wanted to work and
-            grow with a team of like minded and passionate creatives.
+            </a>
+            . My aspiration has always been to collaborate and thrive within a
+            dynamic team of passionate and like-minded creatives. I am eager to
+            contribute my skills and dedication to projects that challenge and
+            inspire, fostering both personal and collective growth.
           </div>,
         ]}
         delay={0.1}
@@ -86,7 +89,7 @@ const About = () => {
               href="https://twitter.com/_AbhinavRajesh_"
               className="font-bold text-primary_light hover:text-blue-400 transition-colors duration-150 ease-in dark:text-primary_dark"
             >
-              Twitter
+              X
             </a>{" "}
             where I talk about technology, or on{" "}
             <a
@@ -117,7 +120,7 @@ const About = () => {
         }}
       >
         <Button
-          to="/resume/resume.pdf"
+          to="/resume/march-2024.pdf"
           text="Resume"
           key="update"
           extraClassNames="mr-[8px]"
