@@ -5,9 +5,15 @@ interface Props {
   text: string;
   inView?: boolean;
   delay?: number;
+  variant?: "primary" | "secondary";
 }
 
-const Bubble = ({ text, inView = true, delay = 0 }: Props) => {
+const Bubble = ({
+  text,
+  inView = true,
+  delay = 0,
+  variant = "primary",
+}: Props) => {
   const [loaded, setLoaded] = useState<boolean>(false);
   const animation = useAnimation();
 
@@ -36,7 +42,11 @@ const Bubble = ({ text, inView = true, delay = 0 }: Props) => {
   return (
     <motion.span
       animate={animation}
-      className="py-1 px-2 text-xs font-semibold text-white bg-primary_light dark:bg-primary_dark leading-[17px] m-[2px] rounded-[4px]"
+      className={`py-1 px-2 text-xs font-semibold ${
+        variant === "primary"
+          ? "text-white bg-primary_light dark:bg-primary_dark"
+          : "text-white bg-transparent border border-primary_light dark:border-primary_dark"
+      } leading-[17px] m-[2px] rounded-[4px]`}
     >
       {text}
     </motion.span>
