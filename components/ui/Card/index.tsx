@@ -67,7 +67,7 @@ const Card = ({
       {bubbles?.length !== 0 && (
         <div className="flex mt-[12px] ml-[20px] flex-wrap">
           {bubbles?.map((skill) => (
-            <Bubble text={skill} variant="secondary" />
+            <Bubble text={skill} variant="secondary" key={skill} />
           ))}
         </div>
       )}
