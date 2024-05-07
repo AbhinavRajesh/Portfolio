@@ -46,11 +46,14 @@ const Project: InferGetStaticPropsType<typeof getStaticProps> = ({
                 alt={data?.title + " image"}
                 width={800}
                 height={400}
-                layout="responsive"
                 quality={100}
                 objectFit={content.length === 0 ? "contain" : "cover"}
                 className="rounded-[10px]"
-              />
+                sizes="100vw"
+                style={{
+                  width: "100%",
+                  height: "auto"
+                }} />
             </div>
           )}
           {content.length !== 0 ? (

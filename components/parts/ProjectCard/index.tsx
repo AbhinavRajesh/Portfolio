@@ -45,12 +45,16 @@ const ProjectCard = ({
           <Image
             src={image}
             alt={name}
-            layout="responsive"
-            objectFit="cover"
-            objectPosition="center"
             height={600}
             width={1200}
             className="rounded-t-[20px] shadow"
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto",
+              objectFit: "cover",
+              objectPosition: "center",
+            }}
           />
           {isGroupProject && (
             <div className="text-white absolute bottom-[20px] right-[10px]">
@@ -64,7 +68,7 @@ const ProjectCard = ({
         <div className="p-[20px]">
           <div className="flex justify-between items-center">
             <h3 className="text-base font-semibold">{name}</h3>
-            <span className="text-xs">
+            <span className="text-xs" suppressHydrationWarning>
               {new Date(createdAt).toLocaleDateString()} -{" "}
               {new Date(updatedAt).toLocaleDateString()}
             </span>

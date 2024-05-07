@@ -41,12 +41,15 @@ const Custom404 = ({ gifUrl }: any) => {
         </span>
         <div className="relative mx-auto w-full h-[400px]">
           <Image
-            layout="responsive"
             height={270}
             width={480}
             src={gifUrl}
             alt="Random fail gifs from Giphy"
-          />
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto"
+            }} />
         </div>
       </div>
     </div>

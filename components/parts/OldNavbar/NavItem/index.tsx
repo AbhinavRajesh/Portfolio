@@ -21,12 +21,26 @@ const NavItem = ({ name, icon, externalLink, to }: NavProps) => {
       >
         <span className="px-4 tablet:px-8 my-1 flex items-center font-semibold text-black dark:text-white">
           <span className="mr-[6px] flex items-center justify-center">
-            <Image src={icon} alt={name} height={14} width={14} />
+            <Image
+              src={icon}
+              alt={name}
+              height={14}
+              width={14}
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </span>
           <span>{name}</span>
         </span>
         <span className="pr-4 tablet:pr-8 flex items-center justify-center">
-          <Image src={ExternalLink} alt="Link" />
+          <Image
+            src={ExternalLink}
+            alt="Link"
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />
         </span>
       </a>
     );
@@ -35,7 +49,15 @@ const NavItem = ({ name, icon, externalLink, to }: NavProps) => {
     <Link href={to}>
       <div className="px-4 tablet:px-8 my-1 font-semibold text-black dark:text-white flex items-center">
         <span className="mr-[6px] flex items-center justify-center">
-          <Image src={icon} alt={name} height={14} width={14} />
+          <Image
+            src={icon}
+            alt={name}
+            height={14}
+            width={14}
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />
         </span>
         <span>{name}</span>
       </div>
