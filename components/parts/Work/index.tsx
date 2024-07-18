@@ -19,7 +19,7 @@ const workExperience: Parameters<typeof Card>[0][] = [
         </a>
       </div>
     ),
-    value: "Feb. 2022 - June 2023",
+    value: "June. 2023 - Present",
     description: (
       <ul className="list-disc list-outside ml-[20px] space-y-[10px]">
         <li>Worked on improving the accessibility of the website</li>
