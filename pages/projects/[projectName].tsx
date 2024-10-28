@@ -25,7 +25,7 @@ const Project: InferGetStaticPropsType<typeof getStaticProps> = ({
   const content: any[] = JSON?.parse(data?.projectContent ?? "[]");
 
   return (
-    (<div className="h-[100vh] font-inter">
+    <div className="min-h-[100vh] font-inter">
       <HeadMeta
         title={`${data?.title} | Abhinav Rajesh`}
         description={data?.description ?? ""}
@@ -35,7 +35,7 @@ const Project: InferGetStaticPropsType<typeof getStaticProps> = ({
       />
       <Navbar />
       <div className="h-full flex px-4 flex-col pt-[46px] text-black dark:text-white dark:bg-gradient-to-tr dark:from-[#111827] dark:to-black">
-        <div className="flex flex-col mt-[52px] tablet:max-w-[650px] tablet:mx-auto tablet:w-full items-center">
+        <div className="flex flex-col mt-[52px] tablet:max-w-[650px] tablet:mx-auto tablet:w-full items-center h-full">
           <h2 className="font-black text-3xl text-left tablet:text-4xl my-[10px] dark:text-white">
             {data?.title}
           </h2>
@@ -52,8 +52,9 @@ const Project: InferGetStaticPropsType<typeof getStaticProps> = ({
                 sizes="100vw"
                 style={{
                   width: "100%",
-                  height: "auto"
-                }} />
+                  height: "auto",
+                }}
+              />
             </div>
           )}
           {content.length !== 0 ? (
@@ -77,7 +78,7 @@ const Project: InferGetStaticPropsType<typeof getStaticProps> = ({
         </div>
         <Footer />
       </div>
-    </div>)
+    </div>
   );
 };
 

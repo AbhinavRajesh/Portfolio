@@ -15,17 +15,28 @@ const workExperience: Parameters<typeof Card>[0][] = [
           rel="noopener noreferrer"
           className="m-0 leading-[17px] text-xs font-bold text-primary_light hover:text-blue-400 transition-colors duration-150 ease-in"
         >
-          @VS&Co.
+          @Victoria&apos;s Secret & Co.
         </a>
       </div>
     ),
     value: "June. 2023 - Present",
     description: (
       <ul className="list-disc list-outside ml-[20px] space-y-[10px]">
-        <li>Worked on improving the accessibility of the website</li>
         <li>
-          Currently working on the new authentication system for the better
-          experience of user
+          Enhanced the accessibility of the main Victoria&apos;s Secret website,
+          leading to a <b>10% increase in retention</b> among users with
+          disabilities.
+        </li>
+        <li>
+          Implemented the &quot;Keep me signed in&quot; feature, resulting in a{" "}
+          <b>$13.6 million</b> annualized impact
+        </li>
+        <li>
+          Integrated an OTP-based authentication system, resulting in a{" "}
+          <b>$12.6 million</b> impact, a <b>27% increase in sign-ins</b>, an{" "}
+          <b>84% reduction in forgot password support requests</b>,
+          approximately <b>4x more account creations</b>, and over{" "}
+          <b>50% of users preferring OTP over passwords</b>.
         </li>
       </ul>
     ),
@@ -49,7 +60,7 @@ const workExperience: Parameters<typeof Card>[0][] = [
     description: (
       <ul className="list-disc list-outside ml-[20px] space-y-[10px]">
         <li>
-          Created the design and developed the website{" "}
+          Designed and developed the entire websites for GitHub India (
           <a
             href="https://githubindia.com"
             target="_blank"
@@ -57,44 +68,41 @@ const workExperience: Parameters<typeof Card>[0][] = [
             className="m-0 leading-[17px] text-xs font-bold text-primary_light hover:text-blue-400 transition-colors duration-150 ease-in"
           >
             githubindia.com
-          </a>{" "}
-          which serves as an anchor point for everything GitHub does in India
+          </a>
+          ) and GitHub Brasil (
+          <a
+            href="https://githubbrasil.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="m-0 leading-[17px] text-xs font-bold text-primary_light hover:text-blue-400 transition-colors duration-150 ease-in"
+          >
+            githubbrasil.com
+          </a>
+          ), serving as key hubs for over <b>10 million developers in India</b>{" "}
+          and <b>3 million+ developers in Brazil</b>, respectively, to access
+          GitHub&apos;s activities and resources.
         </li>
         <li>
-          Ported the{" "}
+          Led the design and development of the GitHub Constellation India 2024
+          website (
           <a
-            href="https://githubindia.com"
+            href="https://githubconstellation.com"
             target="_blank"
             rel="noopener noreferrer"
             className="m-0 leading-[17px] text-xs font-bold text-primary_light hover:text-blue-400 transition-colors duration-150 ease-in"
           >
-            GitHub India
-          </a>{" "}
-          website for Brazil as{" "}
-          <a
-            href="https://githubbrazil.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="m-0 leading-[17px] text-xs font-bold text-primary_light hover:text-blue-400 transition-colors duration-150 ease-in"
-          >
-            githubbrazil.com
-          </a>{" "}
-          which serves as an anchor point for everything GitHub does in Brazil
+            githubconstellation.com
+          </a>
+          ), supporting{" "}
+          <b>
+            India&apos;s largest opensource developer conference where GitHub
+            CEO Thomas Dohmke delivered the keynote address.
+          </b>
         </li>
         <li>
-          Created various designs for upcoming initiatives and posters for
-          various social media posts for their{" "}
-          <a
-            href="https://twitter.com/GitHubIndia"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="m-0 leading-[17px] text-xs font-bold text-primary_light hover:text-blue-400 transition-colors duration-150 ease-in"
-          >
-            @GitHubIndia
-          </a>{" "}
-          X handle
+          Created internal tools that streamlined operations, reducing manual
+          tasks for Hubbers by <b>5%</b>.
         </li>
-        <li>Created few internal tools for better hubber experience</li>
       </ul>
     ),
     bubbles: [
@@ -144,8 +152,10 @@ const workExperience: Parameters<typeof Card>[0][] = [
           from a design.
         </li>
         <li>
-          Converted various web pages written in different frameworks to
-          Wordpress websites fortheir website and their clients
+          Converted multiple web pages to WordPress websites, resulting in a{" "}
+          <b>25% increase in website manageability</b> and a{" "}
+          <b>20% reduction in maintenance costs</b> for GrowthCX and its
+          clients.
         </li>
       </ul>
     ),
