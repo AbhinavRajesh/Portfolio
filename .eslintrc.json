@@ -1,3 +1,7 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    // Temporary till migration
+    "@next/next/no-html-link-for-pages": "off"
+  }
 }
