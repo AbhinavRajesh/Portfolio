@@ -39,7 +39,7 @@ const ProjectCard = ({
   };
 
   return (
-    (<div onClick={handleClick} className="cursor-pointer">
+    <div onClick={handleClick} className="cursor-pointer">
       <div className="flex flex-col shadow dark:shadow-[#eeeeee3b] rounded-[20px]">
         <div className="relative w-full">
           <Image
@@ -53,8 +53,9 @@ const ProjectCard = ({
               width: "100%",
               height: "auto",
               objectFit: "cover",
-              objectPosition: "center"
-            }} />
+              objectPosition: "center",
+            }}
+          />
           {isGroupProject && (
             <div className="text-white absolute bottom-[20px] right-[10px]">
               <Bubble text="Group Project" />
@@ -68,8 +69,8 @@ const ProjectCard = ({
           <div className="flex justify-between items-center">
             <h3 className="text-base font-semibold">{name}</h3>
             <span className="text-xs">
-              {new Date(createdAt).toLocaleDateString()} -{" "}
-              {new Date(updatedAt).toLocaleDateString()}
+              {new Date(createdAt).toLocaleDateString("en-GB")} -{" "}
+              {new Date(updatedAt).toLocaleDateString("en-GB")}
             </span>
           </div>
           <p className="text-light_gray text-sm font-medium">{tagline}</p>
@@ -105,7 +106,7 @@ const ProjectCard = ({
           </div>
         </div>
       </div>
-    </div>)
+    </div>
   );
 };
 

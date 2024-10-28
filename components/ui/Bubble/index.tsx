@@ -45,7 +45,7 @@ const Bubble = ({
       className={`py-1 px-2 text-xs font-semibold ${
         variant === "primary"
           ? "text-white bg-primary_light dark:bg-primary_dark"
-          : "text-white bg-transparent border border-primary_light dark:border-primary_dark"
+          : "dark:text-white bg-transparent border border-primary_light dark:border-primary_dark"
       } leading-[17px] m-[2px] rounded-[4px]`}
     >
       {text}

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { SiGithub, SiTwitter } from "react-icons/si";
+import { SiGithub, SiX } from "react-icons/si";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import Button from "@components/ui/Button";
 import AboutSection from "./AboutSection";
@@ -15,7 +15,7 @@ const About = () => {
                 <SiGithub className="w-7 h-7" />
               </a>
               <a href="https://twitter.com/_AbhinavRajesh_">
-                <SiTwitter className="w-7 h-7" />
+                <SiX className="w-7 h-7" />
               </a>
               <span className="flex items-center px-[12px] py-[4px] rounded-full bg-slate-200 text-black">
                 <HiOutlineLocationMarker className="w-5 h-5 mr-[5px]" />
