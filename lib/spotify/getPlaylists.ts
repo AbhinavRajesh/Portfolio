@@ -1,10 +1,11 @@
 import { Spotify } from "@lib/types";
 import axios from "axios";
-import getPlaylistById from "./getPlaylistById";
+// import getPlaylistById from "./getPlaylistById";
 
 interface Response {
   success: boolean;
   playlists: Spotify.Playlist[];
+  playlistIds: string[];
 }
 
 const getPlaylists = async (
@@ -18,22 +19,33 @@ const getPlaylists = async (
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    const playlistPromises = data?.items?.map((playlist: any) => {
-      const playlistId = playlist?.external_urls?.spotify?.split("/")?.pop();
-      return getPlaylistById(userId, playlistId, accessToken);
+    const playlistIds = data?.items?.map((playlist: any) =>
+      playlist?.external_urls?.spotify?.split("/")?.pop()
+    );
+
+    const playlists = data?.items?.map((playlist: any) => {
+      return {
+        name: playlist?.name,
+        description: playlist?.description,
+        imageUrl: playlist?.images?.[0]?.url ?? "",
+        numberOfTracks: playlist?.tracks?.total,
+        url: playlist?.external_urls?.spotify,
+      } as Spotify.Playlist;
     });
 
-    const playlistsResponse = await Promise.all(playlistPromises);
-    const playlists = playlistsResponse?.map(({ playlists }) => playlists?.[0]);
+    // const playlistsResponse = await Promise.all(playlistPromises);
+    // const playlists = playlistsResponse?.map(({ playlists }) => playlists?.[0]);
     return {
       success: true,
       playlists,
+      playlistIds,
     };
   } catch (error: any) {
     console.log("ERROR getPlaylists >> ", error.response);
     return {
       success: false,
       playlists: [],
+      playlistIds: [],
     };
   }
 };

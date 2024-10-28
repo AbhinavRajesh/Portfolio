@@ -1,12 +1,12 @@
-import { GetStaticProps } from "next";
+// import { GetStaticProps } from "next";
 import Link from "next/link";
-import fs from "fs";
+// import fs from "fs";
 
 import gifs from "@lib/gifs.json";
 import Image from "next/image";
 import HeadMeta from "@components/partials/HeadMeta";
 
-const Custom404 = ({ gifUrl }: any) => {
+const Custom404 = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-full font-inter px-[16px] text-center dark:bg-[#202124] dark:text-text_dark">
       <HeadMeta
@@ -43,7 +43,7 @@ const Custom404 = ({ gifUrl }: any) => {
           <Image
             height={270}
             width={480}
-            src={gifUrl}
+            src={gifs?.gifs?.[Math.floor(gifs?.gifs?.length * Math.random())]}
             alt="Random fail gifs from Giphy"
             sizes="100vw"
             style={{
@@ -58,46 +58,46 @@ const Custom404 = ({ gifUrl }: any) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const giphy = {
-    baseURL: "https://api.giphy.com/v1/gifs/",
-    apiKey: process.env.NEXT_GIPHY_API,
-    tag: "fails",
-    type: "random",
-    rating: "pg-13",
-  };
-  let giphyURL = encodeURI(
-    giphy.baseURL +
-      giphy.type +
-      "?api_key=" +
-      giphy.apiKey +
-      "&tag=" +
-      giphy.tag +
-      "&rating=" +
-      giphy.rating
-  );
+// export const getStaticProps: GetStaticProps = async () => {
+//   const giphy = {
+//     baseURL: "https://api.giphy.com/v1/gifs/",
+//     apiKey: process.env.NEXT_GIPHY_API,
+//     tag: "fails",
+//     type: "random",
+//     rating: "pg-13",
+//   };
+//   let giphyURL = encodeURI(
+//     giphy.baseURL +
+//       giphy.type +
+//       "?api_key=" +
+//       giphy.apiKey +
+//       "&tag=" +
+//       giphy.tag +
+//       "&rating=" +
+//       giphy.rating
+//   );
 
-  let gifUrl: string = "";
-  await fetch(giphyURL)
-    .then(async (res) => {
-      const data = await res.json();
-      gifUrl = data.data?.images?.original?.url ?? "";
-      const id = gifUrl?.split("/")?.[gifUrl?.split("/")?.length - 2] ?? "";
-      const present = gifs.gifs.find((url) => url?.includes(id ?? ""));
-      if (present) throw Error(`Duplicate id: ${id}`);
-      gifs.gifs.push(gifUrl);
-      fs.writeFileSync("lib/gifs.json", JSON.stringify(gifs, null, 4));
-    })
-    .catch((err) => {
-      console.log(err);
-      gifUrl = gifs?.gifs?.[Math.floor(gifs?.gifs?.length * Math.random())];
-    });
+//   let gifUrl: string = "";
+//   await fetch(giphyURL)
+//     .then(async (res) => {
+//       const data = await res.json();
+//       gifUrl = data.data?.images?.original?.url ?? "";
+//       // const id = gifUrl?.split("/")?.[gifUrl?.split("/")?.length - 2] ?? "";
+//       // const present = gifs.gifs.find((url) => url?.includes(id ?? ""));
+//       // if (present) throw Error(`Duplicate id: ${id}`);
+//       // gifs.gifs.push(gifUrl);
+//       // fs.writeFileSync("lib/gifs.json", JSON.stringify(gifs, null, 4));
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       gifUrl = gifs?.gifs?.[Math.floor(gifs?.gifs?.length * Math.random())];
+//     });
 
-  return {
-    props: {
-      gifUrl,
-    },
-  };
-};
+//   return {
+//     props: {
+//       gifUrl,
+//     },
+//   };
+// };
 
 export default Custom404;

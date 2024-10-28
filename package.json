@@ -13,7 +13,7 @@
     "axios": "^1.7.7",
     "framer-motion": "^11.11.10",
     "ioredis": "^5.0.6",
-    "next": "^15.0.1",
+    "next": "14.2.16",
     "querystring": "^0.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

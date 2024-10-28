@@ -15,21 +15,27 @@ import { SpotifyCurrentlyPlayingResponse } from "./api/data/spotify/currently_pl
 interface Props {
   playlists: Spotify.Playlist[];
   topTracks: Spotify.TopTracks[];
+  playlistIds: string[];
 }
 
 interface CachedCurrentlyPlaying extends Spotify.CurrentlyPlaying {
   lastUpdated: string;
 }
 
-const About: NextPage<any> = ({ playlists, topTracks }: Props) => {
+const About: NextPage<any> = ({
+  playlists: serverPlaylists,
+  topTracks,
+  playlistIds,
+}: Props) => {
+  const [playlists, setPlaylists] =
+    useState<Spotify.Playlist[]>(serverPlaylists);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [isPageLoading, setIsPageLoading] = useState<boolean>(true);
   const [currentlyPlaying, setCurrentlyPlaying] =
     useState<Spotify.CurrentlyPlaying>();
 
   const getCurrentlyPlayingData = async () => {
-    setIsPageLoading(true);
-    setIsFetching(true);
+    if (isFetching) return;
     const cachedCurrentlyPlayingString =
       sessionStorage.getItem("currentlyPlaying");
     const cachedCurrentlyPlaying = cachedCurrentlyPlayingString
@@ -64,13 +70,35 @@ const About: NextPage<any> = ({ playlists, topTracks }: Props) => {
         );
       setCurrentlyPlaying(rest);
     }
+  };
+
+  const getPlaylists = async () => {
+    if (isFetching) return;
+    const response = await fetch(`/api/data/spotify/get_playlist_by_ids`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        playlistIds,
+      }) as any,
+    });
+
+    const json = await response.json();
+    setPlaylists(json.playlists);
+  };
+
+  const fetchPageData = async () => {
+    setIsPageLoading(true);
+    setIsFetching(true);
+    await Promise.all([getCurrentlyPlayingData(), getPlaylists()]);
     setIsFetching(false);
     setIsPageLoading(false);
   };
 
   useEffect(() => {
     if (!isFetching && isPageLoading) {
-      getCurrentlyPlayingData();
+      fetchPageData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -125,6 +153,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
             ({ numberOfTracks }) => numberOfTracks !== 0
           ) as Spotify.Playlist[],
           topTracks,
+          playlistIds: data.playlistIds,
         },
         revalidate: 1 * 60 * 60,
       };
@@ -133,6 +162,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
         props: {
           playlists: [],
           topTracks: [],
+          playlistIds: [],
         },
       };
     }
@@ -141,6 +171,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     return {
       props: {
         playlists: [],
+        playlistIds: [],
         topTracks: [],
       },
     };

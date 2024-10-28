@@ -1,47 +1,58 @@
-import getAccessToken from "@lib/spotify/getAccessToken";
-import getPlaylists from "@lib/spotify/getPlaylists";
-import getTopTracks from "@lib/spotify/getTopTracks";
+import { NextApiRequest, NextApiResponse } from "next";
 import { Spotify } from "@lib/types";
-import type { NextApiRequest, NextApiResponse } from "next";
-
 import IORedis from "ioredis";
+import getAccessToken from "@lib/spotify/getAccessToken";
+import getPlaylistById from "@lib/spotify/getPlaylistById";
+
+export type SpotifyPlaylistResponse = SuccessResponse | FailureResponse;
 
 interface SuccessResponse {
   success: true;
   playlists: Spotify.Playlist[];
-  topTracks: Spotify.TopTracks[];
-  playlistIds: string[];
 }
 
-interface FailResponse {
+interface FailureResponse {
   success: false;
-  message: string;
+  message?: string;
 }
-export type SpotifyResponse = SuccessResponse | FailResponse;
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<SpotifyResponse>
+  res: NextApiResponse<SpotifyPlaylistResponse>
 ) {
-  const { api_key } = req.headers;
-
-  if (api_key !== process.env.NEXT_PUBLIC_API_KEY)
-    return res.status(403).json({
+  if (req.method !== "POST")
+    return res.status(404).json({
       success: false,
-      message: "Invalid API Key",
+      message: `${req.method} not allowed`,
     });
 
-  const redis = new IORedis(process.env.REDIS_URL as string);
-  const userId = "1btozxcm2gj1kzu1t2kctpasn";
+  const host =
+    process.env.NODE_ENV === "development"
+      ? "localhost:3000"
+      : "abhinavrajesh.com";
 
+  if (!req.headers.host?.includes(host))
+    return res.status(403).json({
+      success: false,
+      message: `unauthorized`,
+    });
+
+  console.log(req.body);
+
+  if (!req.body?.playlistIds) {
+    return res.status(400).json({
+      success: false,
+      message: `Invalid body`,
+    });
+  }
+
+  const redis = new IORedis(process.env.REDIS_URL as string);
   try {
     const [accessToken, refreshToken] = await redis.mget(
       "spotify:access_token",
       "spotify:refresh_token"
     );
-
     let token: string;
-
     if (!accessToken && refreshToken) {
       // Access token expired, create new access token
       const {
@@ -72,23 +83,23 @@ export default async function handler(
       // No access or refresh token present in redis
       throw new Error("No access token/refresh token found");
     }
-    const responses = await Promise.all([
-      getPlaylists(userId, token),
-      getTopTracks(token),
-    ]);
     await redis.quit();
+
+    const playlistPromises = req.body?.playlistIds?.map((id: string) =>
+      getPlaylistById("1btozxcm2gj1kzu1t2kctpasn", id, token)
+    );
+
+    const playlistsResponse = await Promise.all(playlistPromises);
+    const playlists = playlistsResponse?.map(({ playlists }) => playlists?.[0]);
+
     return res.status(200).json({
       success: true,
-      playlists: responses[0].success ? responses[0]?.playlists : [],
-      topTracks: responses[1].success ? responses[1]?.topTracks : [],
-      playlistIds: responses[0].success ? responses[0]?.playlistIds : [],
+      playlists,
     });
   } catch (error) {
-    console.log(error);
-    console.log("ERROR /api/data/spotify >>", error);
     return res.status(500).json({
       success: false,
-      message: "Some error occured, check logs.",
+      message: "Internal server error, check logs",
     });
   }
 }
