@@ -31,17 +31,17 @@ const About: NextPage<any> = ({ playlists, topTracks }: Props) => {
     setIsPageLoading(true);
     setIsFetching(true);
     const cachedCurrentlyPlayingString =
-      localStorage.getItem("currentlyPlaying");
+      sessionStorage.getItem("currentlyPlaying");
     const cachedCurrentlyPlaying = cachedCurrentlyPlayingString
       ? ((await JSON.parse(
-        cachedCurrentlyPlayingString
-      )) as CachedCurrentlyPlaying)
+          cachedCurrentlyPlayingString
+        )) as CachedCurrentlyPlaying)
       : null;
     if (
       cachedCurrentlyPlaying &&
       new Date().getTime() / 1000 -
-      parseInt(cachedCurrentlyPlaying.lastUpdated) <
-      60 * 4
+        parseInt(cachedCurrentlyPlaying.lastUpdated) <
+        30
     ) {
       setCurrentlyPlaying(cachedCurrentlyPlaying);
       return;
@@ -54,13 +54,14 @@ const About: NextPage<any> = ({ playlists, topTracks }: Props) => {
 
     if (data.success) {
       const { success, ...rest } = data;
-      localStorage.setItem(
-        "currentlyPlaying",
-        JSON.stringify({
-          ...rest,
-          lastUpdated: new Date().getTime() / 1000,
-        })
-      );
+      if (data.playing)
+        sessionStorage.setItem(
+          "currentlyPlaying",
+          JSON.stringify({
+            ...rest,
+            lastUpdated: new Date().getTime() / 1000,
+          })
+        );
       setCurrentlyPlaying(rest);
     }
     setIsFetching(false);
@@ -114,10 +115,16 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     );
 
     if (data.success) {
+      const topTracks = (data?.topTracks as Spotify.TopTracks[]).filter(
+        ({ name }) => !name?.includes("BRODYAGA")
+      );
+
       return {
         props: {
-          playlists: data.playlists.filter(({ numberOfTracks }) => numberOfTracks !== 0) as Spotify.Playlist[],
-          topTracks: data.topTracks as Spotify.TopTracks[],
+          playlists: data.playlists.filter(
+            ({ numberOfTracks }) => numberOfTracks !== 0
+          ) as Spotify.Playlist[],
+          topTracks,
         },
         revalidate: 1 * 60 * 60,
       };

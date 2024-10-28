@@ -11,7 +11,7 @@ const getTopTracks = async (accessToken: string): Promise<Response> => {
   const endpoint = "https://api.spotify.com/v1/me/top/tracks?";
   try {
     const { data } = await axios.get(
-      endpoint + stringify({ time_range: "short_term", limit: "20" }),
+      endpoint + stringify({ time_range: "long_term", limit: "25" }),
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,

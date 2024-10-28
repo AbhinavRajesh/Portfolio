@@ -1,5 +1,6 @@
 import { Spotify } from "@lib/types";
 import axios from "axios";
+import getPlaylistById from "./getPlaylistById";
 
 interface Response {
   success: boolean;
@@ -17,19 +18,16 @@ const getPlaylists = async (
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    const playlists = data?.items?.map((playlist: any) => {
-      return {
-        name: playlist?.name,
-        description: playlist?.description,
-        imageUrl: playlist?.images?.[0]?.url ?? "",
-        numberOfTracks: playlist?.tracks?.total,
-        url: playlist?.external_urls?.spotify,
-      } as Spotify.Playlist;
+    const playlistPromises = data?.items?.map((playlist: any) => {
+      const playlistId = playlist?.external_urls?.spotify?.split("/")?.pop();
+      return getPlaylistById(userId, playlistId, accessToken);
     });
 
+    const playlistsResponse = await Promise.all(playlistPromises);
+    const playlists = playlistsResponse?.map(({ playlists }) => playlists?.[0]);
     return {
       success: true,
-      playlists: playlists,
+      playlists,
     };
   } catch (error: any) {
     console.log("ERROR getPlaylists >> ", error.response);

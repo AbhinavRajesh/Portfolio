@@ -1,6 +1,6 @@
 import SpotifyCard from "@components/ui/SpotifyCard";
 import { Spotify } from "@lib/types";
-import Image from "next/image";
+// import Image from "next/image";
 
 interface Props {
   currentlyPlaying: Spotify.CurrentlyPlaying;
@@ -20,6 +20,7 @@ const CurrentlyPlaying = ({ currentlyPlaying }: Props) => {
             url={currentlyPlaying.url as string}
             description={currentlyPlaying.artist as string}
             explicit={currentlyPlaying.explicit}
+            playlist={currentlyPlaying.playlist}
           />
         </div>
         {/* <div className="flex justify-center items-center"> 

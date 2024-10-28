@@ -38,6 +38,7 @@ declare namespace Spotify {
     imageUrl: string;
     url: string;
     numberOfTracks: number;
+    followers?: number;
   };
 
   type CurrentlyPlaying = {
@@ -47,5 +48,6 @@ declare namespace Spotify {
     url: string | null;
     imageUrl: string | null;
     explicit: boolean;
+    playlist: Playlist | null;
   };
 }

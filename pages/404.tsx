@@ -8,7 +8,7 @@ import HeadMeta from "@components/partials/HeadMeta";
 
 const Custom404 = ({ gifUrl }: any) => {
   return (
-    (<div className="flex flex-col items-center justify-center h-screen w-screen font-inter px-[16px] text-center dark:bg-[#202124] dark:text-text_dark">
+    <div className="flex flex-col items-center justify-center min-h-screen w-full font-inter px-[16px] text-center dark:bg-[#202124] dark:text-text_dark">
       <HeadMeta
         title="404 | Abhinav Rajesh"
         description="This is the 404 page. This page is probably moved, or still being created, or doesn't exist."
@@ -37,9 +37,9 @@ const Custom404 = ({ gifUrl }: any) => {
           </a>
         </div>
         <span className="mt-[30px] mb-[10px] font-bold">
-          Or just watch some random gif from giphy
+          Or just watch some random fails from giphy
         </span>
-        <div className="relative mx-auto w-full h-[400px]">
+        <div className="relative mx-auto w-full min-h-[400px] pb-[40px]">
           <Image
             height={270}
             width={480}
@@ -48,15 +48,17 @@ const Custom404 = ({ gifUrl }: any) => {
             sizes="100vw"
             style={{
               width: "100%",
-              height: "auto"
-            }} />
+              height: "auto",
+            }}
+            unoptimized
+          />
         </div>
       </div>
-    </div>)
+    </div>
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async () => {
   const giphy = {
     baseURL: "https://api.giphy.com/v1/gifs/",
     apiKey: process.env.NEXT_GIPHY_API,
@@ -75,14 +77,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       giphy.rating
   );
 
-  let gifUrl: string | null = "";
+  let gifUrl: string = "";
   await fetch(giphyURL)
     .then(async (res) => {
       const data = await res.json();
-      gifUrl = data.data?.images?.original?.url;
-      const id = gifUrl?.split("/")?.[gifUrl?.split("/")?.length - 2];
+      gifUrl = data.data?.images?.original?.url ?? "";
+      const id = gifUrl?.split("/")?.[gifUrl?.split("/")?.length - 2] ?? "";
       const present = gifs.gifs.find((url) => url?.includes(id ?? ""));
-      if (present) throw Error("Duplicate");
+      if (present) throw Error(`Duplicate id: ${id}`);
       gifs.gifs.push(gifUrl);
       fs.writeFileSync("lib/gifs.json", JSON.stringify(gifs, null, 4));
     })

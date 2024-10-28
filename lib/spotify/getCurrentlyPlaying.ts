@@ -1,4 +1,6 @@
 import axios from "axios";
+import getPlaylistById from "./getPlaylistById";
+import { Spotify } from "@lib/types";
 
 interface Response {
   success: boolean;
@@ -8,6 +10,7 @@ interface Response {
   url: string | null;
   imageUrl: string | null;
   explicit: boolean;
+  playlist: Spotify.Playlist | null;
 }
 
 const getCurrentlyPlaying = async (accessToken: string): Promise<Response> => {
@@ -19,6 +22,19 @@ const getCurrentlyPlaying = async (accessToken: string): Promise<Response> => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+
+    const playlistId = data?.context?.external_urls?.spotify?.split("/")?.pop();
+    let playlist: Spotify.Playlist | null = null;
+    if (playlistId) {
+      const userId = "1btozxcm2gj1kzu1t2kctpasn";
+      const { playlists } = await getPlaylistById(
+        userId,
+        playlistId,
+        accessToken
+      );
+      playlist = playlists?.[0] ?? null;
+    }
+
     if (status === 204 || !data.is_playing)
       return {
         success: true,
@@ -28,6 +44,7 @@ const getCurrentlyPlaying = async (accessToken: string): Promise<Response> => {
         url: null,
         imageUrl: null,
         explicit: false,
+        playlist,
       };
     return {
       success: true,
@@ -39,6 +56,7 @@ const getCurrentlyPlaying = async (accessToken: string): Promise<Response> => {
         .join(", "),
       imageUrl: data?.item?.album?.images?.[0]?.url ?? null,
       explicit: data?.item?.explicit ?? false,
+      playlist,
     };
   } catch (error) {
     return {
@@ -49,6 +67,7 @@ const getCurrentlyPlaying = async (accessToken: string): Promise<Response> => {
       url: null,
       imageUrl: null,
       explicit: false,
+      playlist: null,
     };
   }
 };
