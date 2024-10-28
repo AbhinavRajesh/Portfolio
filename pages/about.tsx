@@ -73,7 +73,7 @@ const About: NextPage<any> = ({
   };
 
   const getPlaylists = async () => {
-    if (isFetching) return;
+    if (isFetching || !playlistIds || playlistIds?.length === 0) return;
     const response = await fetch(`/api/data/spotify/get_playlist_by_ids`, {
       method: "POST",
       headers: {
@@ -153,7 +153,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
             ({ numberOfTracks }) => numberOfTracks !== 0
           ) as Spotify.Playlist[],
           topTracks,
-          playlistIds: data.playlistIds,
+          playlistIds: data?.playlistIds ?? [],
         },
         revalidate: 1 * 60 * 60,
       };
