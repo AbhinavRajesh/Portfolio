@@ -1,5 +1,4 @@
-import { motion, useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 interface Props {
   text: string;
@@ -14,34 +13,26 @@ const Bubble = ({
   delay = 0,
   variant = "primary",
 }: Props) => {
-  const [loaded, setLoaded] = useState<boolean>(false);
-  const animation = useAnimation();
-
-  useEffect(() => {
-    if (loaded) return;
-    if (inView) {
-      setLoaded(true);
-      animation.start({
-        y: 0,
-        opacity: 1,
-        transition: {
-          type: "tween",
-          duration: 0.2,
-          delay: delay,
-        },
-      });
-    } else {
-      animation.start({
-        y: "30px",
-        opacity: 0,
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView]);
-
   return (
     <motion.span
-      animate={animation}
+      whileInView="visible"
+      initial="hidden"
+      viewport={{ once: true }}
+      variants={{
+        hidden: {
+          y: 30,
+          opacity: 0,
+        },
+        visible: {
+          y: 0,
+          opacity: 1,
+        },
+      }}
+      transition={{
+        type: "tween",
+        duration: 0.3,
+        delay,
+      }}
       className={`py-1 px-2 text-xs font-semibold ${
         variant === "primary"
           ? "text-white bg-primary_light dark:bg-primary_dark"

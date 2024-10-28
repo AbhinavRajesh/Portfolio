@@ -1,8 +1,5 @@
-import Bubble from "@components/ui/Bubble";
 import Card from "@components/ui/Card";
-import { motion, useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 
 const workExperience: Parameters<typeof Card>[0][] = [
   {
@@ -173,39 +170,27 @@ const workExperience: Parameters<typeof Card>[0][] = [
 ];
 
 const Work = () => {
-  const [loaded, setLoaded] = useState<boolean>(false);
-  const { ref, inView } = useInView();
-  const animation = useAnimation();
-
-  useEffect(() => {
-    if (loaded) return;
-    if (inView) {
-      setLoaded(true);
-      animation.start({
-        y: 0,
-        opacity: 1,
-        transition: {
-          type: "tween",
-          duration: 0.3,
-        },
-      });
-    } else {
-      animation.start({
-        y: "30px",
-        opacity: 0,
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView]);
-
   return (
-    <div
-      ref={ref}
-      className="flex flex-col mt-[52px] tablet:max-w-[650px] tablet:mx-auto tablet:w-full"
-    >
+    <div className="flex flex-col mt-[52px] tablet:max-w-[650px] tablet:mx-auto tablet:w-full">
       <motion.h2
         className="text-xl font-bold text-black dark:text-white"
-        animate={animation}
+        whileInView="visible"
+        initial="hidden"
+        viewport={{ once: true }}
+        variants={{
+          hidden: {
+            y: 30,
+            opacity: 0,
+          },
+          visible: {
+            y: 0,
+            opacity: 1,
+          },
+        }}
+        transition={{
+          type: "tween",
+          duration: 0.3,
+        }}
       >
         Work Experience
       </motion.h2>
@@ -217,7 +202,6 @@ const Work = () => {
             description={description}
             extras={extras}
             delay={i / 10 + 0.2}
-            inView={inView}
             bubbles={bubbles}
             key={i}
           />

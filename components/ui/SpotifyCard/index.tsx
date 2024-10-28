@@ -1,8 +1,5 @@
 import { Spotify } from "@lib/types";
 import Image from "next/image";
-import { HiHeart, HiOutlineExternalLink } from "react-icons/hi";
-import { MdExplicit } from "react-icons/md";
-import { SiHearthisdotat } from "react-icons/si";
 
 type Modify<T, R> = Omit<T, keyof R> & R;
 
@@ -62,7 +59,19 @@ const SpotifyCard = ({
         </div>
         <h3 className="font-semibold">
           {explicit && (
-            <MdExplicit className="inline -mt-[3px] mr-1 text-gray-300" />
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 24 24"
+              className="inline -mt-[3px] mr-1 text-gray-300"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 6h-4v2h4v2h-4v2h4v2H9V7h6v2z"></path>
+            </svg>
           )}
           {name}{" "}
           {description && (
@@ -88,7 +97,22 @@ const SpotifyCard = ({
           className="text-[14px] font-semibold flex items-center text-gray-400"
         >
           <span className="pr-[4px]">{playlist.name}</span>
-          <HiOutlineExternalLink />
+          <svg
+            stroke="currentColor"
+            fill="none"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+            ></path>
+          </svg>
         </a>
       )}
     </>

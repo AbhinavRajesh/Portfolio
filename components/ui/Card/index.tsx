@@ -1,5 +1,5 @@
-import { motion, useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
 import Bubble from "../Bubble";
 
 interface Props {
@@ -17,37 +17,30 @@ const Card = ({
   value,
   description,
   extras,
-  inView,
   delay = 0,
   bubbles,
 }: Props) => {
-  const [loaded, setLoaded] = useState<boolean>(false);
-  const animation = useAnimation();
-
-  useEffect(() => {
-    if (loaded) return;
-    if (inView) {
-      setLoaded(true);
-      animation.start({
-        y: 0,
-        opacity: 1,
-        transition: {
-          type: "tween",
-          duration: 0.3,
-          delay: delay,
-        },
-      });
-    } else {
-      animation.start({
-        y: "30px",
-        opacity: 0,
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView]);
-
   return (
-    <motion.div animate={animation} className="flex flex-col mt-[24px]">
+    <motion.div
+      whileInView="visible"
+      initial="hidden"
+      viewport={{ once: true }}
+      variants={{
+        hidden: {
+          y: 30,
+          opacity: 0,
+        },
+        visible: {
+          y: 0,
+          opacity: 1,
+        },
+      }}
+      transition={{
+        type: "tween",
+        duration: 0.3,
+      }}
+      className="flex flex-col mt-[24px]"
+    >
       <div className="flex items-start justify-between">
         <span className="text-sm font-semibold text-black dark:text-white">
           {title}
