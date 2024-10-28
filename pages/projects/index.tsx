@@ -133,7 +133,6 @@ export async function getStaticProps() {
       props: {
         data: data,
       },
-      revalidate: 1 * 60 * 60,
     };
   } catch (error) {
     console.log(error);
