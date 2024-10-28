@@ -8,7 +8,7 @@ import HeadMeta from "@components/partials/HeadMeta";
 
 const Custom404 = ({ gifUrl }: any) => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-screen font-inter px-[16px] text-center dark:bg-[#202124] dark:text-text_dark">
+    (<div className="flex flex-col items-center justify-center h-screen w-screen font-inter px-[16px] text-center dark:bg-[#202124] dark:text-text_dark">
       <HeadMeta
         title="404 | Abhinav Rajesh"
         description="This is the 404 page. This page is probably moved, or still being created, or doesn't exist."
@@ -26,8 +26,8 @@ const Custom404 = ({ gifUrl }: any) => {
           exist.
         </p>
         <div className="flex space-x-5 mt-[20px]">
-          <Link href="/">
-            <a className="text-primary_light">Return to Home</a>
+          <Link href="/" className="text-primary_light">
+            Return to Home
           </Link>
           <a
             className="text-primary_light"
@@ -41,15 +41,18 @@ const Custom404 = ({ gifUrl }: any) => {
         </span>
         <div className="relative mx-auto w-full h-[400px]">
           <Image
-            layout="responsive"
             height={270}
             width={480}
             src={gifUrl}
             alt="Random fail gifs from Giphy"
-          />
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto"
+            }} />
         </div>
       </div>
-    </div>
+    </div>)
   );
 };
 

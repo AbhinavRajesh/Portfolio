@@ -13,7 +13,7 @@ const MapPin = () => {
 
 const From = () => {
   return (
-    <div className="flex flex-col mt-[52px] tablet:max-w-[650px] tablet:mx-auto tablet:w-full">
+    (<div className="flex flex-col mt-[52px] tablet:max-w-[650px] tablet:mx-auto tablet:w-full">
       <h2 className="text-xl font-bold text-black dark:text-white">From</h2>
       <div className="mt-6 relative">
         <Image
@@ -21,10 +21,13 @@ const From = () => {
           alt="Kerala, India Map View"
           width={800}
           height={400}
-          layout="responsive"
           quality={100}
           className="rounded-[10px]"
-        />
+          sizes="100vw"
+          style={{
+            width: "100%",
+            height: "auto"
+          }} />
         <MapPin />
       </div>
       <div className="flex items-center justify-end mt-[5px] text-dark dark:text-text_dark">
@@ -33,7 +36,7 @@ const From = () => {
           Kerala, India
         </span>
       </div>
-    </div>
+    </div>)
   );
 };
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="pt-[52px] -mx-4">
+    (<div className="pt-[52px] -mx-4">
       <div className="flex flex-col px-4 shadow-inverse-sm dark:shadow-[#eeeeee3d] dark:text-text_dark">
         <div className="flex mt-[28px] justify-between items-start tablet:max-w-[650px] tablet:mx-auto tablet:w-full">
           <div className="flex flex-col items-start flex-[2]">
@@ -13,10 +13,10 @@ const Footer = () => {
           </div>
           <div className="flex flex-col text-dark dark:text-text_dark flex-1">
             <Link href="/">
-              <a>Home</a>
+              Home
             </Link>
             <Link href="/about">
-              <a>About</a>
+              About
             </Link>
             <a
               href="https://blog.abhinavrajesh.com"
@@ -26,7 +26,7 @@ const Footer = () => {
               Blog &#x2197;
             </a>
             <Link href="/projects">
-              <a>Projects</a>
+              Projects
             </Link>
           </div>
         </div>
@@ -34,7 +34,7 @@ const Footer = () => {
           Built with <span className="text-[#FF0000]">❤️</span>
         </span>
       </div>
-    </div>
+    </div>)
   );
 };
 

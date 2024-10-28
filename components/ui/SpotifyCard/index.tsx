@@ -22,7 +22,7 @@ const SpotifyCard = ({
   explicit,
 }: Props) => {
   return (
-    <a
+    (<a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
@@ -33,9 +33,9 @@ const SpotifyCard = ({
           <Image
             src={imageUrl as string}
             alt={name}
-            layout="fill"
             className="aspect-square"
-          />
+            fill
+            sizes="100vw" />
         </div>
       </div>
       <h3 className="font-semibold">
@@ -58,7 +58,7 @@ const SpotifyCard = ({
           {numberOfTracks} tracks
         </p>
       )}
-    </a>
+    </a>)
   );
 };
 
