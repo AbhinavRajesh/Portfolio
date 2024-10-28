@@ -28,4 +28,7 @@ module.exports = {
   sassOptions: {
     silenceDeprecations: ["legacy-js-api"],
   },
+  experimental: {
+    optimizePackageImports: ["react-icons"],
+  },
 };
