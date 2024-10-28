@@ -39,19 +39,22 @@ const ProjectCard = ({
   };
 
   return (
-    <div onClick={handleClick} className="cursor-pointer">
+    (<div onClick={handleClick} className="cursor-pointer">
       <div className="flex flex-col shadow dark:shadow-[#eeeeee3b] rounded-[20px]">
         <div className="relative w-full">
           <Image
             src={image}
             alt={name}
-            layout="responsive"
-            objectFit="cover"
-            objectPosition="center"
             height={600}
             width={1200}
             className="rounded-t-[20px] shadow"
-          />
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto",
+              objectFit: "cover",
+              objectPosition: "center"
+            }} />
           {isGroupProject && (
             <div className="text-white absolute bottom-[20px] right-[10px]">
               <Bubble text="Group Project" />
@@ -102,7 +105,7 @@ const ProjectCard = ({
           </div>
         </div>
       </div>
-    </div>
+    </div>)
   );
 };
 

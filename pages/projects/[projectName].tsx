@@ -25,7 +25,7 @@ const Project: InferGetStaticPropsType<typeof getStaticProps> = ({
   const content: any[] = JSON?.parse(data?.projectContent ?? "[]");
 
   return (
-    <div className="h-[100vh] font-inter">
+    (<div className="h-[100vh] font-inter">
       <HeadMeta
         title={`${data?.title} | Abhinav Rajesh`}
         description={data?.description ?? ""}
@@ -46,11 +46,14 @@ const Project: InferGetStaticPropsType<typeof getStaticProps> = ({
                 alt={data?.title + " image"}
                 width={800}
                 height={400}
-                layout="responsive"
                 quality={100}
                 objectFit={content.length === 0 ? "contain" : "cover"}
                 className="rounded-[10px]"
-              />
+                sizes="100vw"
+                style={{
+                  width: "100%",
+                  height: "auto"
+                }} />
             </div>
           )}
           {content.length !== 0 ? (
@@ -74,7 +77,7 @@ const Project: InferGetStaticPropsType<typeof getStaticProps> = ({
         </div>
         <Footer />
       </div>
-    </div>
+    </div>)
   );
 };
 

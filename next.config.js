@@ -2,18 +2,27 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: [
-      "opengraph.githubassets.com",
-      "media0.giphy.com",
-      "media1.giphy.com",
-      "media2.giphy.com",
-      "media3.giphy.com",
-      "media4.giphy.com",
-      "aura-ar.vercel.app",
-      "chatbotish.vercel.app",
-      "sahaay.xyz",
-      "i.scdn.co",
-      "mosaic.scdn.co",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "opengraph.githubassets.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.giphy.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.vercel.app",
+      },
+      {
+        protocol: "https",
+        hostname: "*.scdn.co",
+      },
+      {
+        protocol: "https",
+        hostname: "*.spotifycdn.com",
+      },
     ],
   },
 };
