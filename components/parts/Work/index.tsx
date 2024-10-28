@@ -15,7 +15,7 @@ const workExperience: Parameters<typeof Card>[0][] = [
           rel="noopener noreferrer"
           className="m-0 leading-[17px] text-xs font-bold text-primary_light hover:text-blue-400 transition-colors duration-150 ease-in"
         >
-          @Victoria's Secret & Co.
+          @Victoria&apos;s Secret & Co.
         </a>
       </div>
     ),
@@ -28,7 +28,7 @@ const workExperience: Parameters<typeof Card>[0][] = [
           disabilities.
         </li>
         <li>
-          Implemented the "Keep me signed in" feature, resulting in a{" "}
+          Implemented the &quot;Keep me signed in&quot; feature, resulting in a{" "}
           <b>$13.6 million</b> annualized impact
         </li>
         <li>
@@ -80,7 +80,7 @@ const workExperience: Parameters<typeof Card>[0][] = [
           </a>
           ), serving as key hubs for over <b>10 million developers in India</b>{" "}
           and <b>3 million+ developers in Brazil</b>, respectively, to access
-          GitHub's activities and resources.
+          GitHub&apos;s activities and resources.
         </li>
         <li>
           Led the design and development of the GitHub Constellation India 2024
@@ -95,8 +95,8 @@ const workExperience: Parameters<typeof Card>[0][] = [
           </a>
           ), supporting{" "}
           <b>
-            India's largest opensource developer conference where GitHub CEO
-            Thomas Dohmke delivered the keynote address.
+            India&apos;s largest opensource developer conference where GitHub
+            CEO Thomas Dohmke delivered the keynote address.
           </b>
         </li>
         <li>
